@@ -4,5 +4,6 @@ define ufw::logging($level='low') {
     command => "ufw logging $level",
     require => Exec['ufw-default-deny'],
     before  => Exec['ufw-enable'],
+    unless  => "sudo ufw status verbose | grep \"Logging: $level\"",
   }
 }
